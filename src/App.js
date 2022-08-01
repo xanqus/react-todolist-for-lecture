@@ -6,6 +6,13 @@ function App() {
   const [todos, setTodos] = useState([])
   const [selectedTodo, setSelectedTodo] = useState(null)
   const [insertToggle, setInsertToggle] = useState(false)
+  const onToggle = id => {
+    setTodos(todos =>
+      todos.map(todo =>
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo
+      )
+    )
+  }
 
   const nextId = useRef(1)
 
@@ -22,7 +29,7 @@ function App() {
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onToggle={onToggle} />
     </TodoTemplate>
   )
 }
