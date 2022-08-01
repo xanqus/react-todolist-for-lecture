@@ -16,6 +16,10 @@ function App() {
 
   const nextId = useRef(1)
 
+  const onRemove = id => {
+    setTodos(todos => todos.filter(todo => todo.id !== id))
+  }
+
   const onInsert = text => {
     const todo = {
       id: nextId.current,
@@ -29,7 +33,7 @@ function App() {
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />
-      <TodoList todos={todos} onToggle={onToggle} />
+      <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove} />
     </TodoTemplate>
   )
 }
