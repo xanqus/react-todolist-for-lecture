@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import TodoInsert from './components/TodoInsert'
 import TodoTemplate from './components/TodoTemplate'
+import TodoList from './components/TodoList'
 function App() {
   const [todos, setTodos] = useState([])
   const [selectedTodo, setSelectedTodo] = useState(null)
@@ -21,13 +22,7 @@ function App() {
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />
-      <button
-        onClick={() => {
-          console.log(todos)
-        }}
-      >
-        check
-      </button>
+      <TodoList todos={todos} />
     </TodoTemplate>
   )
 }
