@@ -1,23 +1,18 @@
 import { useEffect, useState } from 'react'
 import '../styles/TodoEdit.scss'
 
-function ToDoEdit({ selectedTodo, onUpdate }) {
+function ToDoEdit({ onInsertToggle }) {
   const [value, setValue] = useState('')
   const onChange = e => {
     setValue(e.target.value)
   }
   const onSubmit = e => {
     e.preventDefault()
-    onUpdate(selectedTodo.id, value)
+    onInsertToggle()
     setValue('') //value 초기화
     //기본이벤트(새로고침) 방지
   }
-  useEffect(() => {
-    if (selectedTodo) {
-      setValue(prevText => selectedTodo.text)
-    }
-    console.log(selectedTodo)
-  }, [selectedTodo])
+
   return (
     <div className="background">
       <form onSubmit={onSubmit} className="todoedit__insert">

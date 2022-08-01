@@ -12,7 +12,7 @@ const TodoListItem = ({
   todo,
   onToggle,
   onRemove,
-  onChangeSelectedTodo,
+
   onInsertToggle,
 }) => {
   const { id, text, checked } = todo
@@ -30,7 +30,6 @@ const TodoListItem = ({
       <div
         className="edit"
         onClick={() => {
-          onChangeSelectedTodo(todo)
           onInsertToggle()
         }}
       >
