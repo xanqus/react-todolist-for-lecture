@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import '../styles/TodoEdit.scss'
 
-function ToDoEdit({ selectedTodo, onInsertToggle }) {
+function ToDoEdit({ selectedTodo, onUpdate, onInsertToggle }) {
   const [value, setValue] = useState('')
   const onChange = e => {
     setValue(e.target.value)
   }
   const onSubmit = e => {
     e.preventDefault()
-    onInsertToggle()
+    onUpdate(selectedTodo.id, value)
     setValue('') //value 초기화
     //기본이벤트(새로고침) 방지
   }

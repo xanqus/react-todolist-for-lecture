@@ -56,7 +56,7 @@ function App() {
         onInsertToggle={onInsertToggle}
       />
       {insertToggle && (
-        <TodoEdit selectedTodo={selectedTodo} onInsertToggle={onInsertToggle} />
+        <TodoEdit selectedTodo={selectedTodo} onUpdate={onUpdate} />
       )}
     </TodoTemplate>
   )
