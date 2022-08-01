@@ -6,7 +6,7 @@ const TodoList = ({
   todos,
   onToggle,
   onRemove,
-
+  onChangeSelectedTodo,
   onInsertToggle,
 }) => {
   return (
@@ -17,6 +17,7 @@ const TodoList = ({
           key={index}
           onToggle={onToggle}
           onRemove={onRemove}
+          onChangeSelectedTodo={onChangeSelectedTodo}
           onInsertToggle={onInsertToggle}
         />
       ))}

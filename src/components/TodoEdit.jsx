@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../styles/TodoEdit.scss'
 
-function ToDoEdit({ onInsertToggle }) {
+function ToDoEdit({ selectedTodo, onInsertToggle }) {
   const [value, setValue] = useState('')
   const onChange = e => {
     setValue(e.target.value)
@@ -12,6 +12,11 @@ function ToDoEdit({ onInsertToggle }) {
     setValue('') //value 초기화
     //기본이벤트(새로고침) 방지
   }
+  useEffect(() => {
+    if (selectedTodo) {
+      setValue(selectedTodo.text)
+    }
+  }, [selectedTodo])
 
   return (
     <div className="background">

@@ -52,9 +52,12 @@ function App() {
         todos={todos}
         onToggle={onToggle}
         onRemove={onRemove}
+        onChangeSelectedTodo={onChangeSelectedTodo}
         onInsertToggle={onInsertToggle}
       />
-      {insertToggle && <TodoEdit onInsertToggle={onInsertToggle} />}
+      {insertToggle && (
+        <TodoEdit selectedTodo={selectedTodo} onInsertToggle={onInsertToggle} />
+      )}
     </TodoTemplate>
   )
 }
