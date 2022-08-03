@@ -14,15 +14,18 @@ function App() {
 
   const onToggle = async id => {
     try {
-      await axios.patch(`http://localhost:4000/todos/check/${id}`)
+      await axios({
+        url: `http://localhost:4000/todos/check/${id}`,
+        method: 'PATCH',
+      })
+      setTodos(todos =>
+        todos.map(todo =>
+          todo.id === id ? { ...todo, checked: !todo.checked } : todo
+        )
+      )
     } catch (e) {
       setError(e)
     }
-    setTodos(todos =>
-      todos.map(todo =>
-        todo.id === id ? { ...todo, checked: !todo.checked } : todo
-      )
-    )
   }
 
   const nextId = useRef(1)
@@ -34,15 +37,32 @@ function App() {
     setSelectedTodo(selectedTodo => todo)
   }
 
-  const onRemove = id => {
-    setTodos(todos => todos.filter(todo => todo.id !== id))
+  const onRemove = async id => {
+    try {
+      await axios({
+        url: `http://localhost:4000/todos/${id}`,
+        method: 'DELETE',
+      })
+      setTodos(todos => todos.filter(todo => todo.id !== id))
+    } catch (e) {
+      setError(e)
+    }
   }
 
-  const onUpdate = (id, text) => {
-    setTodos(todos =>
-      todos.map(todo => (todo.id === id ? { ...todo, text } : todo))
-    )
-    onInsertToggle()
+  const onUpdate = async (id, text) => {
+    try {
+      await axios({
+        url: `http://localhost:4000/todos/${id}`,
+        method: 'PATCH',
+        data: { text, perform_date: '2022-08-04 12:12:12' },
+      })
+      setTodos(todos =>
+        todos.map(todo => (todo.id === id ? { ...todo, text } : todo))
+      )
+      onInsertToggle()
+    } catch (e) {
+      setError(e)
+    }
   }
 
   const onInsert = async text => {
@@ -74,6 +94,7 @@ function App() {
     getData()
   }, [])
   if (error) {
+    console.log(error)
     return <>에러: {error.message}</>
   }
 
