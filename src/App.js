@@ -40,14 +40,17 @@ function App() {
     onInsertToggle()
   }
 
-  const onInsert = text => {
-    const todo = {
-      id: nextId.current,
-      text,
-      checked: false,
+  const onInsert = async text => {
+    try {
+      const data = await axios({
+        url: 'http://localhost:4000/todos',
+        method: 'POST',
+        data: { text },
+      })
+      setTodos(todos => [...todos, data.data])
+    } catch (e) {
+      setError(e)
     }
-    setTodos(todos => todos.concat(todo))
-    nextId.current++
   }
 
   useEffect(() => {
@@ -57,7 +60,7 @@ function App() {
           url: 'http://localhost:4000/todos',
           method: 'GET',
         })
-        setTodos(data.data)
+        setTodos(todos => [...data.data])
         setIsLoading(false)
       } catch (e) {
         setError(e)
