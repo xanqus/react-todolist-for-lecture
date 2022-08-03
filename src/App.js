@@ -12,7 +12,8 @@ function App() {
   const [selectedTodo, setSelectedTodo] = useState(null)
   const [insertToggle, setInsertToggle] = useState(false)
 
-  const onToggle = id => {
+  const onToggle = async id => {
+    await axios.patch(`http://localhost:4000/todos/check/${id}`)
     setTodos(todos =>
       todos.map(todo =>
         todo.id === id ? { ...todo, checked: !todo.checked } : todo
